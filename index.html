@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 lte9 lte8 lte7 lte6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 lte9 lte8 lte7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8 lte9 lte8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9 lte9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>Padme plugin</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<link href="example/screen.css" rel="stylesheet" />
+	
+	<script src="js/jquery-1.11.0.js"></script>
+	<script src="js/jquery.padme.js"></script>
+	
+	<script>
+		$(function(){
+			// For the purposes of the example, it is assumed there will always be 4 columns
+			
+			$('.justified').padme(4);
+			
+			$('h2 a').on('click', function(e) {
+				e.preventDefault();
+				var c = $(this).data('cols');
+				$('article').attr('class', '').addClass( 'cols-' + c );
+				$('.justified').padme(c);
+				$(this).addClass('active').siblings().removeClass('active');
+			});
+			
+			$('h2 a[data-cols=4]').addClass('active');
+			
+		});
+	</script>
+	
+</head>
+<body>
+	
+	<article>
+	
+		<h1>Padme</h1>
+		<section class="intro">
+			<p>A jQuery plugin to pad a justified list or group with placeholders, based on the number of columns in the layout.</p>
+			<p><a href="https://github.com/sneaknz/padme">View on Github</a> | <a href="https://github.com/sneaknz/padme/archive/master.zip">Download latest version</a></p>
+		</section>
+	
+		<section class="container">
+			<h2>Examples 
+				<small>&mdash; Switch to 
+					<a href="#" data-cols="3">3 cols</a> • 
+					<a href="#" data-cols="4">4 cols</a> • 
+					<a href="#" data-cols="5">5 cols</a>
+				</small>
+			</h2>
+			<p>One item</p>
+			<ul class="justified">
+				<li class="item"></li>
+			</ul>
+			
+			<p>Two items</p>
+			<ul class="justified">
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+
+			<p>Three items</p>
+			<ul class="justified">
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+			
+			<p>Four items</p>
+			<ul class="justified">
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+
+			<p>Four items plus one floated</p>
+			<ul class="justified">
+				<li class="item floated"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+			
+			<p>Example using section and divs rather than an unordered list</p>
+			<section class="justified">
+				<div class="item"></div>
+				<div class="item"></div>
+			</section>
+			
+			<h2>Usage</h2>
+			<p>
+				Call the plugin on the parent element of the list/group. This doesn't have to 
+				be an unordered list, so long as all direct children of the parent are items 
+				belonging to the list or group. <br><strong>You must pass in a value for the number of 
+				columns your list/group is laid out with.</strong>
+			</p>
+			<code><pre>$('.list').padme(4);</pre></code>
+			<p>
+				You can optionally pass in a CSS class name to be used for the placeholder 
+				elements (default is 'placeholder'):
+			</p>
+			<code><pre>$('.list').padme(4 {
+	placeholderClass: 'my-classname'
+});</pre></code>
+			<p>
+				The plugin first strips out any existing placeholder elements, so you can call 
+				the plugin multiple times as your layout changes if required and it will re-pad 
+				the list accordingly.
+			</p>
+		</section>
+		
+	</article>
+		
+</body>
+</html>
