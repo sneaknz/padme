@@ -18,13 +18,19 @@
 		$(function(){
 			// For the purposes of the example, it is assumed there will always be 4 columns
 			
-			$('.justified').padme(4);
+			$('.padme').padme(4);
+			$('.custom').padme(4, {
+				children: '.item'
+			});
 			
 			$('h2 a').on('click', function(e) {
 				e.preventDefault();
 				var c = $(this).data('cols');
 				$('article').attr('class', '').addClass( 'cols-' + c );
-				$('.justified').padme(c);
+				$('.padme').padme(c);
+				$('.custom').padme(c, {
+					children: '.item'
+				});
 				$(this).addClass('active').siblings().removeClass('active');
 			});
 			
@@ -53,25 +59,25 @@
 				</small>
 			</h2>
 			<p>One item</p>
-			<ul class="justified">
+			<ul class="padme justified">
 				<li class="item"></li>
 			</ul>
 			
 			<p>Two items</p>
-			<ul class="justified">
+			<ul class="padme justified">
 				<li class="item"></li>
 				<li class="item"></li>
 			</ul>
 
 			<p>Three items</p>
-			<ul class="justified">
+			<ul class="padme justified">
 				<li class="item"></li>
 				<li class="item"></li>
 				<li class="item"></li>
 			</ul>
 			
 			<p>Four items</p>
-			<ul class="justified">
+			<ul class="padme justified">
 				<li class="item"></li>
 				<li class="item"></li>
 				<li class="item"></li>
@@ -79,7 +85,7 @@
 			</ul>
 
 			<p>Four items plus one floated</p>
-			<ul class="justified">
+			<ul class="padme justified">
 				<li class="item floated"></li>
 				<li class="item"></li>
 				<li class="item"></li>
@@ -88,9 +94,16 @@
 			</ul>
 			
 			<p>Example using section and divs rather than an unordered list</p>
-			<section class="justified">
+			<section class="padme justified">
 				<div class="item"></div>
 				<div class="item"></div>
+			</section>
+			
+			<p>Example with custom children sepecified</p>
+			<section class="custom justified">
+				<div class="item"></div>
+				<div class="item"></div>
+				<h4>This element is the last in the list, but should not be counted</h4>
 			</section>
 			
 			<h2>Usage</h2>
@@ -102,10 +115,11 @@
 			</p>
 			<code><pre>$('.list').padme(4);</pre></code>
 			<p>
-				You can optionally pass in a CSS class name to be used for the placeholder 
-				elements (default is 'placeholder'):
+				You can optionally pass in a set of options:
 			</p>
-			<code><pre>$('.list').padme(4 {
+			<code><pre>$('.list').padme(4, {
+	children: '.item',
+	placeholderEl: 'div'
 	placeholderClass: 'my-classname'
 });</pre></code>
 			<p>
@@ -113,6 +127,22 @@
 				the plugin multiple times as your layout changes if required and it will re-pad 
 				the list accordingly.
 			</p>
+			
+			<h2>Options</h2>
+			<table>
+			 	<tr>
+					<th align="left" valign="top">children</th>
+					<td><em>Optional, String</em>. A comma separated list of elements or IDs/classes for the children you want to be included as part of the group. Useful when you have a number of 'special case' elements that you will be laying out separately but happen to sit within the parent container.</td>
+				</tr>
+				<tr>
+					<th align="left" valign="top">placeholderEl</th>
+					<td><em>Optional, String</em>. The element type to be used for any placeholders that get added as padding for the group. If not specified, this defaults to using the type of the first child in the group.</td>
+				</tr>
+				<tr>
+					<th align="left" valign="top">placeholderClass</th>
+					<td><em>Optional, String</em>. A class name to be added to placeholder elements added to pad the group.</td>
+				</tr>
+			</table>
 		</section>
 		
 	</article>

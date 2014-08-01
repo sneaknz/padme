@@ -4,15 +4,32 @@ A jQuery plugin to pad a justified list or group with placeholders, based on the
 
 ## Usage
 
-Call the plugin on the parent element of the list/group. This doesn't have to be an unordered list, so long as all direct children of the parent are items belonging to the list or group. **You must pass in a value for the number of 
-columns your list/group is laid out with**.
+Call the plugin on the parent element of the list/group. This doesn't have to be an unordered list, so long as all direct children of the parent are items belonging to the list or group. **You must pass in a value for the number of columns your list/group is laid out with**.
 
 	$('.list').padme(4);
 
-You can optionally pass in a CSS class name to be used for the placeholder elements (default is 'placeholder'):
+You can optionally pass in a set of options:
 	
-	$('.list').padme(4 {
+	$('.list').padme(4, {
+		placeholderEl: 'div',
 		placeholderClass: 'my-classname'
 	});
 
 The plugin first strips out any existing placeholder elements, so you can call the plugin multiple times as your layout changes if required and it will re-pad the list accordingly.
+
+## Options
+
+<table>
+ 	<tr>
+		<th align="left" valign="top">children</th>
+		<td><em>Optional, String</em>. A comma separated list of elements or IDs/classes for the children you want to be included as part of the group. Useful when you have a number of 'special case' elements that you will be laying out separately but happen to sit within the parent container.</td>
+	</tr>
+	<tr>
+		<th align="left" valign="top">placeholderEl</th>
+		<td><em>Optional, String</em>. The element type to be used for any placeholders that get added as padding for the group. If not specified, this defaults to using the type of the first child in the group.</td>
+	</tr>
+	<tr>
+		<th align="left" valign="top">placeholderClass</th>
+		<td><em>Optional, String</em>. A class name to be added to placeholder elements added to pad the group.</td>
+	</tr>
+</table>

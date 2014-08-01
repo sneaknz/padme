@@ -135,6 +135,23 @@ p {
 	height: 0;
 }
 
+.custom { padding-bottom: 20px; }
+
+.custom h4 {
+	display: block;
+	font-size: 14px;
+	background: #f60;
+	padding: 5px 10px;
+	margin: 0 0 5px;
+	position: absolute;
+	bottom: 0;
+	font-weight: normal;
+	color: #fff;
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+}
+
 .placeholder {
 	position: relative;
 }
@@ -176,4 +193,13 @@ pre {
 code {
 	font-family: Consolas, Monaco, monospace;
 	font-size: 13px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 7px 10px;
 }

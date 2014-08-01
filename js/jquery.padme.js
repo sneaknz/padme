@@ -1,13 +1,17 @@
 /* 
 	Padme plugin
-	v1.0
+	v1.1
 	Mike Harding
 	
 	A jQuery plugin to pad a justified list with placeholders, based on the number of columns.
 
 	Usage: $('.list').padme(4);
 
-	       $('.list').padme(4, { placeholderClass: 'classname' });
+	       $('.list').padme(4, {
+				children: 'li, .child',
+				placeholderEl: 'div',
+				placeholderClass: 'classname'
+			});
 */
 
 (function($) {
@@ -15,53 +19,68 @@
 	$.fn.padme = function(cols, options) {
 		
 		var opts = $.extend({}, $.fn.padme.defaults, options);
+		
+		function addPlaceholders(num, me) {
+			// Pad out the list with placeholders
+			var p = '';
+			for ( var i = 0; i < (cols - num); i++ ) {
+				p += ' ' + me.placeholder;
+			}
+			me.$group.append(p);
+		}
+		
+		function removeOverflow(me) {
+			// Remove placeholders that get wrapped to another line 
+			// due to floats and other external influences
+			me.$group.find('.' + opts.placeholderClass).each(function() {
+				if ( $(this).position().top > me.top ) {
+					$(this).remove();
+				}
+			});					
+		}
 
-		return this.each(function(index) {
-			var $group = $(this),
-				$items = $group.children().not('.' + opts.placeholderClass);
-			
-			if ( $items.length > 0 ) {
-				var tag = $items.eq(0).prop('tagName'),
-					placeholder = '<' + tag + ' class="' + opts.placeholderClass + '"></' + tag + '>';
+		return this.each(function() {
+			var me = {
+					$group: $(this)
+				};
 				
-				$group.find('.' + opts.placeholderClass).remove();
+			// If children are defined then use them, otherwise default to all children
+			if ( opts.children ) {
+				me.$items = me.$group.children(opts.children).not('.' + opts.placeholderClass);
+			} else {
+				me.$items = me.$group.children().not('.' + opts.placeholderClass);
+			}	
+			
+			if ( me.$items.length > 0 ) {
+				var el;
+				
+				if ( opts.placeholderEl ) {
+					el = opts.placeholderEl;
+				} else {
+					el = me.$items.eq(0).prop('tagName');
+				}
+				
+				me.placeholder = '<' + el + ' class="' + opts.placeholderClass + '"></' + el + '>';
+
+				me.$group.find('.' + opts.placeholderClass).remove();
 				
 				// Get top position of last item
-				var itemIndex = $items.length - 1,
-					top = $items.eq( itemIndex ).position().top,
-					count = 1,
-					currTop = top,
+				var itemIndex = me.$items.length - 1;
+				me.top = me.$items.eq( itemIndex ).position().top;
+				var	count = 1,
+					currTop = me.top,
 					exit = false;
-				
-				
-				function addPlaceholders(num) {
-					// Pad out the list with placeholders
-					var p = '';
-					for ( var i = 0; i < (cols - num); i++ ) {
-						p += ' ' + placeholder;
-					}
-					$group.append(p);
-				}
-				
-				function removeOverflow() {
-					// Remove placeholders that get wrapped to another line 
-					// due to floats and other external influences
-					$group.find('.' + opts.placeholderClass).each(function() {
-						if ( $(this).position().top > top ) {
-							$(this).remove();
-						}
-					});					
-				}
 				
 				// Check for previous siblings
 				while ( count < cols && !exit && itemIndex > 0 ) {
 					itemIndex--;
 
-					var $prevItem = $items.eq( itemIndex );
+					var $prevItem = me.$items.eq( itemIndex );
 					
 					if ( $prevItem.length ) {
 						currTop = $prevItem.position().top;
-						if ( currTop >= top ) {
+
+						if ( currTop >= me.top ) {
 							count++;
 						} else {
 							exit = true;
@@ -71,8 +90,11 @@
 					}
 				}
 				
-				addPlaceholders(count);
-				removeOverflow();
+				addPlaceholders(count, me);
+
+				if ( opts.removeOverflow ) {
+					removeOverflow(me);
+				}
 			}
 			
 		});
@@ -81,7 +103,10 @@
 	
 	// plugin defaults
 	$.fn.padme.defaults = {
-		placeholderClass: 'placeholder'
+		children: null,
+		placeholderEl: null,
+		placeholderClass: 'placeholder',
+		removeOverflow: false
 	};
 
 })(jQuery);
