@@ -1,6 +1,6 @@
 /* 
 	Padme plugin
-	v1.1
+	v1.2
 	Mike Harding
 	
 	A jQuery plugin to pad a justified list with placeholders, based on the number of columns.
