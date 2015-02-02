@@ -93,6 +93,12 @@
 				<li class="item"></li>
 			</ul>
 			
+			<p>Example using data attribute</p>
+			<ul class="padme justified" data-padme-cols="4">
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+			
 			<p>Example using section and divs rather than an unordered list</p>
 			<section class="padme justified">
 				<div class="item"></div>
@@ -110,10 +116,15 @@
 			<p>
 				Call the plugin on the parent element of the list/group. This doesn't have to 
 				be an unordered list, so long as all direct children of the parent are items 
-				belonging to the list or group. <br><strong>You must pass in a value for the number of 
-				columns your list/group is laid out with.</strong>
+				belonging to the list or group.
+			</p>
+			<p><strong>Note: You must pass in a value for the number of 
+				columns your list/group is laid out with.</strong> This can either be done when 
+				calling the javascript, or as a data attribute on the list/group itself:
 			</p>
 			<code><pre>$('.list').padme(4);</pre></code>
+			<p>Or:</p>
+			<code><pre>&lt;ul data-padme-cols="4"> ... &lt;/ul></pre></code>
 			<p>
 				You can optionally pass in a set of options:
 			</p>

@@ -23,13 +23,14 @@
 		function addPlaceholders(num, me) {
 			// Pad out the list with placeholders
 			var p = '';
-			for ( var i = 0; i < (cols - num); i++ ) {
+			for ( var i = 0; i < (opts.cols - num); i++ ) {
 				p += ' ' + me.placeholder;
 			}
 			me.$group.append(p);
 		}
 		
 		function removeOverflow(me) {
+			// EXPERIMENTAL
 			// Remove placeholders that get wrapped to another line 
 			// due to floats and other external influences
 			me.$group.find('.' + opts.placeholderClass).each(function() {
@@ -41,9 +42,12 @@
 
 		return this.each(function() {
 			var me = {
-					$group: $(this)
+					$group: $(this),
+					cols: $(this).data('padme-cols')
 				};
-				
+			
+			opts.cols = me.cols ? me.cols : cols;
+			
 			// If children are defined then use them, otherwise default to all children
 			if ( opts.children ) {
 				me.$items = me.$group.children(opts.children).not('.' + opts.placeholderClass);
@@ -72,7 +76,7 @@
 					exit = false;
 				
 				// Check for previous siblings
-				while ( count < cols && !exit && itemIndex > 0 ) {
+				while ( count < opts.cols && !exit && itemIndex > 0 ) {
 					itemIndex--;
 
 					var $prevItem = me.$items.eq( itemIndex );
