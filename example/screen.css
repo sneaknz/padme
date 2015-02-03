@@ -108,18 +108,18 @@ p {
 	padding-top: 10%;
 }
 
-.cols-3 .justified > .item,
-.cols-3 .justified > .placeholder {
+.cols-3 .update > .item,
+.cols-3 .update > .placeholder {
 	width: 32%;
 	padding-top: 10%;
 }
-.cols-3 .justified > .floated {
+.cols-3 .update > .floated {
 	padding-top: 24%;
 	margin-left: 2%;
 }
 
-.cols-5 .justified > .item,
-.cols-5 .justified > .placeholder {
+.cols-5 .update > .item,
+.cols-5 .update > .placeholder {
 	width: 16%;
 	padding-top: 10%;
 }

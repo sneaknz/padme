@@ -17,25 +17,36 @@
 	<script>
 		$(function(){
 			// For the purposes of the example, it is assumed there will always be 4 columns
-			
-			$('.padme').padme(4);
-			$('.custom').padme(4, {
+			$('.padme').padme({ cols: 4 });
+			$('.with-float').padme({
+				cols: 4,
+				allowExtras: true
+			});
+			$('.data-attr').padme();
+			$('.custom').padme({
+				cols: 4,
 				children: '.item'
 			});
 			
 			$('h2 a').on('click', function(e) {
 				e.preventDefault();
 				var c = $(this).data('cols');
+				console.log(c);
 				$('article').attr('class', '').addClass( 'cols-' + c );
-				$('.padme').padme(c);
-				$('.custom').padme(c, {
+				$('.padme').padme({ cols: c });
+				$('.with-float').padme({
+					cols: c,
+					allowExtras: true
+				});
+				$('.data-attr').padme({ cols: c });
+				$('.custom').padme({
+					cols: c,
 					children: '.item'
 				});
 				$(this).addClass('active').siblings().removeClass('active');
 			});
 			
 			$('h2 a[data-cols=4]').addClass('active');
-			
 		});
 	</script>
 	
@@ -58,55 +69,55 @@
 					<a href="#" data-cols="5">5 cols</a>
 				</small>
 			</h2>
-			<p>One item</p>
-			<ul class="padme justified">
+			<p>1. One item</p>
+			<ul id="example-1" class="padme justified update">
 				<li class="item"></li>
 			</ul>
-			
-			<p>Two items</p>
-			<ul class="padme justified">
+
+			<p>2. Two items</p>
+			<ul id="example-2" class="padme justified update">
 				<li class="item"></li>
 				<li class="item"></li>
 			</ul>
 
-			<p>Three items</p>
-			<ul class="padme justified">
-				<li class="item"></li>
-				<li class="item"></li>
-				<li class="item"></li>
-			</ul>
-			
-			<p>Four items</p>
-			<ul class="padme justified">
-				<li class="item"></li>
+			<p>3. Three items</p>
+			<ul id="example-3" class="padme justified update">
 				<li class="item"></li>
 				<li class="item"></li>
 				<li class="item"></li>
 			</ul>
 
-			<p>Four items plus one floated</p>
-			<ul class="padme justified">
+			<p>4. Four items</p>
+			<ul id="example-4" class="padme justified update">
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+
+			<p>5. Four items plus one floated</p>
+			<ul id="example-5" class="with-float justified update">
 				<li class="item floated"></li>
 				<li class="item"></li>
 				<li class="item"></li>
 				<li class="item"></li>
 				<li class="item"></li>
 			</ul>
-			
-			<p>Example using data attribute</p>
-			<ul class="padme justified" data-padme-cols="4">
+
+			<p>6. Example using data attribute</p>
+			<ul id="example-6" class="data-attr justified update" data-padme-cols="4">
 				<li class="item"></li>
 				<li class="item"></li>
 			</ul>
 			
-			<p>Example using section and divs rather than an unordered list</p>
-			<section class="padme justified">
+			<p>7. Example using section and divs rather than an unordered list</p>
+			<section id="example-7" class="padme justified update">
 				<div class="item"></div>
 				<div class="item"></div>
 			</section>
 			
-			<p>Example with custom children sepecified</p>
-			<section class="custom justified">
+			<p>8. Example with custom children sepecified</p>
+			<section id="example-8" class="custom justified update">
 				<div class="item"></div>
 				<div class="item"></div>
 				<h4>This element is the last in the list, but should not be counted</h4>
