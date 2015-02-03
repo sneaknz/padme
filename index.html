@@ -133,13 +133,14 @@
 				columns your list/group is laid out with.</strong> This can either be done when 
 				calling the javascript, or as a data attribute on the list/group itself:
 			</p>
-			<code><pre>$('.list').padme(4);</pre></code>
+			<code><pre>$('.list').padme({ cols: 4 });</pre></code>
 			<p>Or:</p>
 			<code><pre>&lt;ul data-padme-cols="4"> ... &lt;/ul></pre></code>
 			<p>
 				You can optionally pass in a set of options:
 			</p>
-			<code><pre>$('.list').padme(4, {
+			<code><pre>$('.list').padme({
+	cols: 4,
 	children: '.item',
 	placeholderEl: 'div'
 	placeholderClass: 'my-classname'
