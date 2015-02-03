@@ -1,17 +1,11 @@
 /* 
 	Padme plugin
-	v1.0.3
+	v1.0.2
 	Mike Harding
 	
 	A jQuery plugin to pad a justified list with placeholders, based on the number of columns.
 
-	Usage: $('.list').padme(4);
-
-	       $('.list').padme(4, {
-				children: 'li, .child',
-				placeholderEl: 'div',
-				placeholderClass: 'classname'
-			});
+	For usage see http://code.sneak.co.nz/padme/
 */
 
 (function($) {
@@ -21,12 +15,14 @@
 		var opts = $.extend({}, $.fn.padme.defaults, options);
 		
 		function addPlaceholders(num, me) {
-			// Pad out the list with placeholders
-			var p = '';
-			for ( var i = 0; i < (me.cols - num); i++ ) {
-				p += ' ' + me.placeholder;
+			if ( num > 0 ) {
+				// Pad out the list with placeholders
+				var p = '';
+				for ( var i = 0; i < (me.cols - num); i++ ) {
+					p += ' ' + me.placeholder;
+				}
+				me.$group.append(p);				
 			}
-			me.$group.append(p);
 		}
 		
 		function removeOverflow(me) {
