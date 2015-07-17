@@ -44,4 +44,8 @@ The plugin first strips out any existing placeholder elements, so you can call t
 		<th align="left" valign="top">allowExtras</th>
 		<td><em>Optional, Boolean</em>. Defaults to 'false'. Set this to true if there are likely to be extra elements in your group/list that will be different widths and may cause the column calculation to not divide into consistent sizes.</td>
 	</tr>
+	<tr>
+		<th align="left" valign="top">matchCols</th>
+		<td><em>Optional, Boolean</em>. Defaults to 'false'. Set this to true if you want to always force the maximum number of placeholders to be added. This is mostly useful when dealing with a responsive layout where the number of items per column can fluctuate.</td>
+	</tr>
 </table>

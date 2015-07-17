@@ -27,6 +27,7 @@
 				cols: 4,
 				children: '.item'
 			});
+			$('.matchcols').padme({ cols: 4, matchCols: true });
 			
 			$('h2 a').on('click', function(e) {
 				e.preventDefault();
@@ -116,12 +117,21 @@
 				<div class="item"></div>
 			</section>
 			
-			<p>8. Example with custom children sepecified</p>
-			<section id="example-8" class="custom justified update">
+			<p>8. Four items, with matchCols set</p>
+			<ul id="example-8" class="matchcols justified update">
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+			
+			<p>9. Example with custom children sepecified</p>
+			<section id="example-9" class="custom justified update">
 				<div class="item"></div>
 				<div class="item"></div>
 				<h4>This element is the last in the list, but should not be counted</h4>
 			</section>
+					
 			
 			<h2>Usage</h2>
 			<p>
@@ -168,6 +178,10 @@
 				<tr>
 					<th align="left" valign="top">allowExtras</th>
 					<td><em>Optional, Boolean</em>. Defaults to 'false'. Set this to true if there are likely to be extra elements in your group/list that will be different widths and may cause the column calculation to not divide into consistent sizes.</td>
+				</tr>
+				<tr>
+					<th align="left" valign="top">matchCols</th>
+					<td><em>Optional, Boolean</em>. Defaults to 'false'. Set this to true if you want to always force the maximum number of placeholders to be added. This is mostly useful when dealing with a responsive layout where the number of items per column can fluctuate.</td>
 				</tr>
 			</table>
 		</section>
